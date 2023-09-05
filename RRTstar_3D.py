@@ -82,14 +82,15 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
         rd = np.random.uniform(0, 1) 
         if path_vec_z < 0:
             phi *= -1
-        if (i>0)&(goal.z-delta_dz<0)&(path_vec_z < 0):
-            phi = abs(phi)
-        if (i>0)&(goal.z-delta_dz>0)&(path_vec_z < 0):
-            phi *=-1
-        if (i>0)&(goal.z-delta_dz<0)&(path_vec_z > 0):
-            phi *=-1
-        if (i>0)&(goal.z-delta_dz>0)&(path_vec_z > 0):
-            phi = abs(phi)
+        if i>0:
+            if (goal.z-delta_dz<0)&(path_vec_z < 0):
+                phi = -abs(phi)
+            if (goal.z-delta_dz>0)&(path_vec_z < 0):
+                phi =abs(phi)
+            if (goal.z-delta_dz<0)&(path_vec_z > 0):
+                phi =-abs(phi)
+            if (goal.z-delta_dz>0)&(path_vec_z > 0):
+                phi = abs(phi)
         if rd < 0.5:
             phi = 0
         delta_dx = round(temp_var.x + delta_d * math.cos(phi)*math.cos(theta), 3)
