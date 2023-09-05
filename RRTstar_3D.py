@@ -82,7 +82,7 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
         rd = np.random.uniform(0, 1) 
         if path_vec_z < 0:
             phi = -phi
-        elif rd-0.5 < 0.1:
+        if rd < 0.5:
             phi = 0
         delta_dx = round(temp_var.x + delta_d * math.cos(phi)*math.cos(theta), 3)
         delta_dy = round(temp_var.y + delta_d * math.cos(phi)*math.sin(theta), 3)
@@ -93,8 +93,10 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
         # if not, then add the point to the point list
         #TODO Temperally only for rectangular shape, might find another library or write a library to replace 2D shape library.
         pt_valid = True
-        for j in range(len(obstacles)):
-            if ((new_pt.x -x_range[j,0] < -intersection) | (new_pt.x - x_range[j,1] > intersection ))&((new_pt.y - y_range[j,0] < -intersection) | (new_pt.y - y_range[j,1] > intersection)) & (new_pt.z - z_range[j,0] < intersection) | (new_pt.z - z_range[j,1] > intersection):
+            if {((new_pt.x -x_range[j,0] < -intersection) | (new_pt.x - x_range[j,1] > intersection ))
+                &((new_pt.y - y_range[j,0] < -intersection)  | (new_pt.y - y_range[j,1] > intersection)) 
+                & ((new_pt.z - z_range[j,0] < intersection) | (new_pt.z - z_range[j,1] > intersection))
+                & (new_pt.z  >= intersection)}:
                 pt_valid_array[j] = 1
                         
         for j in pt_valid_array:
@@ -138,6 +140,7 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
         if iter== 20:
             print("Path not found. Target might be generated inside the obstacles.")
             return None,None
+        vertices += 1000
         pt_list, path= finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,iter)
         return pt_list, path
     else:
