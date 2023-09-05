@@ -133,7 +133,7 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
 
     # Return the path by adding user defined vertices everytime until path found.
     if not path:
-        print("Path not found: Increase  vertices by ", vertices)
+        print("Path not found: Increase  vertices by 1000")
         # print("Path not found: Increase the vertices")
         # return pt_list, None
         iter +=1
@@ -150,13 +150,13 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
 
 # Initialize the input grid, start and end goal
 # n_x, n_y, n_z represents the no. of x,y,z grids space.
-target_pose = torch.tensor([5.0,12.5,0.4])
+target_pose = torch.tensor([5.0,12.5,0.45])
 total_path = []
 print(target_pose)
 n_x, n_y, n_z = 20, 20, 20
-start = Node(7.5, 10.0, 2.5)
+start = Node(7.5, 10.0, 1.5)
 goal = Node(target_pose[0].item(), target_pose[1].item(), target_pose[2].item())
-vertices = 1000
+vertices = 5000
 # intersection is the distance that the node will be considered as inside the obstacle.
 intersection = 0.2
 
