@@ -84,8 +84,8 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
             phi = -phi
         elif rd-0.5 < 0.1:
             phi = 0
-        delta_dx = round(temp_var.x + delta_d * math.cos(theta), 3)
-        delta_dy = round(temp_var.y + delta_d * math.sin(theta), 3)
+        delta_dx = round(temp_var.x + delta_d * math.cos(phi)*math.cos(theta), 3)
+        delta_dy = round(temp_var.y + delta_d * math.cos(phi)*math.sin(theta), 3)
         delta_dz = round(temp_var.z + delta_d * math.sin(phi), 3)
 
         new_pt = Node(delta_dx, delta_dy, delta_dz)
