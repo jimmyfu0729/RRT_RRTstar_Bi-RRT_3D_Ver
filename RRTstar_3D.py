@@ -104,7 +104,7 @@ def finding_path(start, goal, n_x, n_y, n_z, vertices, intersection, obstacles,i
         pt_valid = True
             if {((new_pt.x -x_range[j,0] < -intersection) | (new_pt.x - x_range[j,1] > intersection ))
                 &((new_pt.y - y_range[j,0] < -intersection)  | (new_pt.y - y_range[j,1] > intersection)) 
-                & ((new_pt.z - z_range[j,0] < intersection) | (new_pt.z - z_range[j,1] > intersection))
+                & ((new_pt.z - z_range[j,0] < -intersection) | (new_pt.z - z_range[j,1] > intersection))
                 & (new_pt.z  >= intersection)}:
                 pt_valid_array[j] = 1
                         
